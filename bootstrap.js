@@ -1,16 +1,9 @@
 'use strict'
 
-const minimist = require('minimist');
-
 const KEYS = ["OPWIRE_REQUEST", "OPWIRE_SETTING"];
 
-function start(callback) {
+function start(args, callback) {
   const store = {}
-
-  const argv = minimist(process.argv.slice(2));
-  const args = {};
-  args.inputFormat = argv["input-format"] || argv["format"] || "json";
-  args.outputFormat = argv["output-format"] || argv["format"] || "json";
 
   KEYS.forEach(function(key) {
     if (key in process.env) {
@@ -39,7 +32,7 @@ function start(callback) {
         error = err;
       }
     }
-    callback(error, args, store);
+    callback(error, store);
   });
 }
 
