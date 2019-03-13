@@ -140,7 +140,7 @@ Result:
 {
   "name": "SyntaxError",
   "message": "Unexpected token N in JSON at position 0",
-  "stack": "SyntaxError: Unexpected token N in JSON at position 0\n    at Object.parse (native)\n    at Socket.process.stdin.on.err (/home/drupalex/projects/opwire/sample-cmdline-node/bootstrap.js:37:28)\n    at emitNone (events.js:91:20)\n    at Socket.emit (events.js:185:7)\n    at endReadableNT (_stream_readable.js:974:12)\n    at _combinedTickCallback (internal/process/next_tick.js:74:11)\n    at process._tickCallback (internal/process/next_tick.js:98:9)"
+  "stack": "SyntaxError: Unexpected token N in JSON at position 0\n    at Object.parse (native)\n    at Socket.process.stdin.on.err ($HOME/projects/opwire/sample-cmdline-node/bootstrap.js:37:28)\n    at emitNone (events.js:91:20)\n    at Socket.emit (events.js:185:7)\n    at endReadableNT (_stream_readable.js:974:12)\n    at _combinedTickCallback (internal/process/next_tick.js:74:11)\n    at process._tickCallback (internal/process/next_tick.js:98:9)"
 }
 ```
 
@@ -249,8 +249,8 @@ net.js:655
 
 TypeError: Invalid data, chunk must be a string or buffer, not object
     at Socket.write (net.js:655:11)
-    at /home/drupalex/projects/opwire/sample-cmdline-node/example.js:7:22
-    at Socket.process.stdin.on.err (/home/drupalex/projects/opwire/sample-cmdline-node/bootstrap.js:42:5)
+    at $HOME/projects/opwire/sample-cmdline-node/example.js:7:22
+    at Socket.process.stdin.on.err ($HOME/projects/opwire/sample-cmdline-node/bootstrap.js:42:5)
     at emitNone (events.js:91:20)
     at Socket.emit (events.js:185:7)
     at endReadableNT (_stream_readable.js:974:12)
