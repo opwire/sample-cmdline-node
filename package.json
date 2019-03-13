@@ -1,0 +1,31 @@
+{
+  "name": "sample-cmdline-node",
+  "version": "1.0.0",
+  "description": "Sample command line for opwire-agent in Nodejs",
+  "main": "example.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/opwire/sample-cmdline-node.git"
+  },
+  "keywords": [
+    "opwire",
+    "opwire-agent",
+    "command-line",
+    "nodejs"
+  ],
+  "author": "Opwire team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/opwire/sample-cmdline-node/issues"
+  },
+  "homepage": "https://github.com/opwire/sample-cmdline-node#readme",
+  "dependencies": {
+    "minimist": "^1.2.0"
+  }
+}
