@@ -1,9 +1,7 @@
-const minimist = require('minimist');
 var bootstrap = require('./bootstrap');
 
-bootstrap(function(err, store) {
-  const argv = minimist(process.argv.slice(2));
-  const isPlainText = argv.format === "text";
+bootstrap(function(err, args, store) {
+  const isPlainText = args.outputFormat !== "json";
   if (err) {
     if (isPlainText) {
       process.stderr.write(err);
