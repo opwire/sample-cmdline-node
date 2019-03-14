@@ -24,12 +24,14 @@ function start(args, callback) {
 
   process.stdin.on('end', () => {
     let error = null;
-    store.input = input;
-    if (args.inputFormat === "json" && input.length > 0) {
-      try {
-        store.input = JSON.parse(input);
-      } catch (err) {
-        error = err;
+    if (input.length > 0) {
+      store.input = input;
+      if (args.inputFormat === "json") {
+        try {
+          store.input = JSON.parse(input);
+        } catch (err) {
+          error = err;
+        }
       }
     }
     callback(error, store);
