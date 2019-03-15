@@ -1,10 +1,9 @@
-var bootstrap = require('./bootstrap');
+'use strict';
 
-const minimist = require('minimist');
-const raw_args = minimist(process.argv.slice(2));
-const args = {};
-args.inputFormat = raw_args["input-format"] || raw_args["format"] || "json";
-args.outputFormat = raw_args["output-format"] || raw_args["format"] || "json";
+const bootstrap = require('./bootstrap');
+const extractArgs = require('./cmdargs');
+
+const args = extractArgs();
 
 bootstrap(args, function(err, store) {
   const isPlainText = args.outputFormat !== "json";

@@ -1,6 +1,6 @@
 'use strict'
 
-const KEYS = ["OPWIRE_REQUEST", "OPWIRE_SETTING"];
+const KEYS = ["OPWIRE_EDITION", "OPWIRE_REQUEST", "OPWIRE_SETTING"];
 
 function start(args, callback) {
   const store = {}
