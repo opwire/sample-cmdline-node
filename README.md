@@ -54,17 +54,17 @@ Make a HTTP request with `curl`:
 ```curl
 curl -v \
   --request POST \
-  --url 'http://localhost:8888/run?type=microservice&type=python' \
+  --url 'http://localhost:8888/run?type=microservice&type=nodejs' \
   --data '{
   "name": "Opwire",
-	"url": "https://opwire.org/"
+  "url": "https://opwire.org/"
 }'
 ```
 
 Result:
 
 ```plain
-> POST /run?type=microservice&type=python HTTP/1.1
+> POST /run?type=microservice&type=nodejs HTTP/1.1
 > User-Agent: curl/7.35.0
 > Host: localhost:8888
 > Accept: */*
@@ -97,7 +97,7 @@ Result:
     "query": {
       "type": [
         "microservice",
-        "python"
+        "nodejs"
       ]
     },
     "params": null
@@ -116,14 +116,14 @@ Make a HTTP request with `curl`:
 ```curl
 curl -v \
   --request POST \
-  --url 'http://localhost:8888/run?type=microservice&type=python' \
+  --url 'http://localhost:8888/run?type=microservice&type=nodejs' \
   --data 'Not a JSON object'
 ```
 
 Result:
 
 ```plain
-> POST /run?type=microservice&type=python HTTP/1.1
+> POST /run?type=microservice&type=nodejs HTTP/1.1
 > User-Agent: curl/7.35.0
 > Host: localhost:8888
 > Accept: */*
@@ -160,58 +160,65 @@ Make a HTTP request with `curl`:
 ```curl
 curl -v \
   --request POST \
-  --url 'http://localhost:8888/run?type=microservice&type=python' \
+  --url 'http://localhost:8888/run?type=microservice&type=nodejs' \
   --data '{
   "name": "Opwire",
-	"url": "https://opwire.org/"
+  "url": "https://opwire.org/"
 }'
 ```
 
 Result:
 
 ```plain
-> POST /run?type=microservice&type=python HTTP/1.1
+> POST /run?type=microservice&type=nodejs HTTP/1.1
 > User-Agent: curl/7.35.0
 > Host: localhost:8888
 > Accept: */*
-> Content-Length: 52
+> Content-Length: 54
 > Content-Type: application/x-www-form-urlencoded
 >
-* upload completely sent off: 52 out of 52 bytes
+* upload completely sent off: 54 out of 54 bytes
 < HTTP/1.1 200 OK
 < Content-Type: text/plain
-< X-Exec-Duration: 0.111771
-< Date: Wed, 13 Mar 2019 06:57:04 GMT
-< Content-Length: 450
+< X-Exec-Duration: 0.092902
+< Date: Fri, 15 Mar 2019 15:41:27 GMT
+< Content-Length: 468
 <
+OPWIRE_EDITION:
 {
-  "OPWIRE_REQUEST": {
-    "header": {
-      "Accept": [
-        "*/*"
-      ],
-      "Content-Length": [
-        "52"
-      ],
-      "Content-Type": [
-        "application/x-www-form-urlencoded"
-      ],
-      "User-Agent": [
-        "curl/7.35.0"
-      ]
-    },
-    "query": {
-      "type": [
-        "microservice",
-        "python"
-      ]
-    },
-    "params": null
+  "revision": "416c9bd",
+  "version": "v1.0.1-3-g416c9bd"
+}
+
+OPWIRE_REQUEST:
+{
+  "header": {
+    "Accept": [
+      "*/*"
+    ],
+    "Content-Length": [
+      "54"
+    ],
+    "Content-Type": [
+      "application/x-www-form-urlencoded"
+    ],
+    "User-Agent": [
+      "curl/7.35.0"
+    ]
   },
-  "input": {
-    "name": "Opwire",
-    "url": "https://opwire.org/"
-  }
+  "query": {
+    "type": [
+      "microservice",
+      "nodejs"
+    ]
+  },
+  "params": null
+}
+
+INPUT:
+{
+  "name": "Opwire",
+  "url": "https://opwire.org/"
 }
 ```
 
@@ -222,14 +229,14 @@ Make a HTTP request with `curl`:
 ```curl
 curl -v \
   --request POST \
-  --url 'http://localhost:8888/run?type=microservice&type=python' \
+  --url 'http://localhost:8888/run?type=microservice&type=nodejs' \
   --data 'Not a JSON object'
 ```
 
 Result:
 
 ```plain
-> POST /run?type=microservice&type=python HTTP/1.1
+> POST /run?type=microservice&type=nodejs HTTP/1.1
 > User-Agent: curl/7.35.0
 > Host: localhost:8888
 > Accept: */*
@@ -240,8 +247,8 @@ Result:
 < HTTP/1.1 500 Internal Server Error
 < Content-Type: text/plain
 < X-Error-Message: exit status 1
-< Date: Wed, 13 Mar 2019 07:20:12 GMT
-< Content-Length: 583
+< Date: Fri, 15 Mar 2019 15:42:07 GMT
+< Content-Length: 584
 <
 net.js:655
     throw new TypeError(
@@ -249,8 +256,8 @@ net.js:655
 
 TypeError: Invalid data, chunk must be a string or buffer, not object
     at Socket.write (net.js:655:11)
-    at $HOME/projects/opwire/sample-cmdline-node/example.js:7:22
-    at Socket.process.stdin.on.err ($HOME/projects/opwire/sample-cmdline-node/bootstrap.js:42:5)
+    at $HOME/projects/opwire/sample-cmdline-node/example.js:12:22
+    at Socket.process.stdin.on.err ($HOME/projects/opwire/sample-cmdline-node/bootstrap.js:37:5)
     at emitNone (events.js:91:20)
     at Socket.emit (events.js:185:7)
     at endReadableNT (_stream_readable.js:974:12)
