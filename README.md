@@ -60,10 +60,10 @@ For other systems:
 Execute the following command:
 
 ```shell
-./opwire-agent -p=8888 --default-command="node example.js"
+./opwire-agent serve -p=8888 --default-command="node example.js"
 ```
 
-Open this URL `http://localhost:8888/run?type=microservice&type=nodejs`:
+Open this URL `http://localhost:8888/$?type=microservice&type=nodejs`:
 
 ![example-output](https://raw.github.com/opwire/sample-cmdline-node/master/docs/assets/images/example.png)
 
@@ -75,7 +75,7 @@ Open this URL `http://localhost:8888/run?type=microservice&type=nodejs`:
 Execute the following command:
 
 ```shell
-./opwire-agent -p=8888 --default-command="node example.js"
+./opwire-agent serve -p=8888 --default-command="node example.js"
 ```
 
 #### Valid input (a JSON object)
@@ -85,7 +85,7 @@ Make a HTTP request with `curl`:
 ```curl
 curl -v \
   --request POST \
-  --url 'http://localhost:8888/run?type=microservice&type=nodejs' \
+  --url 'http://localhost:8888/$?type=microservice&type=nodejs' \
   --data '{
   "name": "Opwire",
   "url": "https://opwire.org/"
@@ -95,7 +95,7 @@ curl -v \
 Result:
 
 ```plain
-> POST /run?type=microservice&type=nodejs HTTP/1.1
+> POST /$?type=microservice&type=nodejs HTTP/1.1
 > User-Agent: curl/7.35.0
 > Host: localhost:8888
 > Accept: */*
@@ -147,14 +147,14 @@ Make a HTTP request with `curl`:
 ```curl
 curl -v \
   --request POST \
-  --url 'http://localhost:8888/run?type=microservice&type=nodejs' \
+  --url 'http://localhost:8888/$?type=microservice&type=nodejs' \
   --data 'Not a JSON object'
 ```
 
 Result:
 
 ```plain
-> POST /run?type=microservice&type=nodejs HTTP/1.1
+> POST /$?type=microservice&type=nodejs HTTP/1.1
 > User-Agent: curl/7.35.0
 > Host: localhost:8888
 > Accept: */*
@@ -180,7 +180,7 @@ Result:
 Execute the following command:
 
 ```shell
-./opwire-agent -p=8888 \
+./opwire-agent serve -p=8888 \
   --default-command="node example.js --input-format=json --output-format=text"
 ```
 
@@ -191,7 +191,7 @@ Make a HTTP request with `curl`:
 ```curl
 curl -v \
   --request POST \
-  --url 'http://localhost:8888/run?type=microservice&type=nodejs' \
+  --url 'http://localhost:8888/$?type=microservice&type=nodejs' \
   --data '{
   "name": "Opwire",
   "url": "https://opwire.org/"
@@ -201,7 +201,7 @@ curl -v \
 Result:
 
 ```plain
-> POST /run?type=microservice&type=nodejs HTTP/1.1
+> POST /$?type=microservice&type=nodejs HTTP/1.1
 > User-Agent: curl/7.35.0
 > Host: localhost:8888
 > Accept: */*
@@ -260,14 +260,14 @@ Make a HTTP request with `curl`:
 ```curl
 curl -v \
   --request POST \
-  --url 'http://localhost:8888/run?type=microservice&type=nodejs' \
+  --url 'http://localhost:8888/$?type=microservice&type=nodejs' \
   --data 'Not a JSON object'
 ```
 
 Result:
 
 ```plain
-> POST /run?type=microservice&type=nodejs HTTP/1.1
+> POST /$?type=microservice&type=nodejs HTTP/1.1
 > User-Agent: curl/7.35.0
 > Host: localhost:8888
 > Accept: */*
