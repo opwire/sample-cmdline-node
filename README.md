@@ -1,23 +1,5 @@
 # opwire-agent: sample command line in Nodejs
 
-<!-- TOC -->
-
-- [Installation](#installation)
-  - [Checkout source code](#checkout-source-code)
-  - [Download `opwire-agent`](#download-opwire-agent)
-- [Call the service from browsers](#call-the-service-from-browsers)
-- [Test the service with `curl`](#test-the-service-with-curl)
-  - [Default data format (`json`)](#default-data-format-json)
-    - [Valid input (a JSON object)](#valid-input-a-json-object)
-    - [Invalid input (not a JSON object)](#invalid-input-not-a-json-object)
-  - [JSON input, plaintext output](#json-input-plaintext-output)
-    - [Valid input (a JSON object)](#valid-input-a-json-object-1)
-    - [Invalid input (not a JSON object)](#invalid-input-not-a-json-object-1)
-- [Contributing](#contributing)
-- [License](#license)
-
-<!-- /TOC -->
-
 ## Installation
 
 ### Checkout source code
@@ -55,7 +37,10 @@ For other systems:
 
 ![project-home-dir](https://raw.github.com/opwire/sample-cmdline-node/master/docs/assets/images/ls.png)
 
-## Call the service from browsers
+
+## Usage
+
+### Call the service from browsers
 
 Execute the following command:
 
@@ -67,10 +52,7 @@ Open this URL `http://localhost:8888/$?type=microservice&type=nodejs`:
 
 ![example-output](https://raw.github.com/opwire/sample-cmdline-node/master/docs/assets/images/example.png)
 
-
-## Test the service with `curl`
-
-### Default data format (`json`)
+### `curl` - Default data format (`json`)
 
 Execute the following command:
 
@@ -175,7 +157,7 @@ Result:
 }
 ```
 
-### JSON input, plaintext output
+### `curl` - JSON input, plaintext output
 
 Execute the following command:
 
@@ -295,6 +277,181 @@ TypeError: Invalid data, chunk must be a string or buffer, not object
     at _combinedTickCallback (internal/process/next_tick.js:74:11)
     at process._tickCallback (internal/process/next_tick.js:98:9)
 ```
+
+## Testing
+
+### Step 1. Make an HTTP request with Insomnia
+
+![make-an-request-with-insomnia](https://raw.github.com/opwire/sample-cmdline-node/master/docs/assets/images/testa-req-with-insomnia.png)
+
+### Step 2. Use `opwire-testa` as `curl` replacement
+
+Copy `curl` command from Insomnia:
+
+![copy-curl-from-insomnia](https://raw.github.com/opwire/sample-cmdline-node/master/docs/assets/images/testa-req-with-insomnia.png)
+
+Prepend `curl` command with `opwire-testa` command:
+
+```
+opwire-testa curl --request POST \
+--url http://localhost:8888/%24 \
+--header 'opwire-execution-timeout: 0.5s' \
+--header 'opwire-request-id: 123456-7890-1234-567890123' \
+--data '{
+  "name": "Opwire",
+  "url": "https://opwire.org"
+}'
+```
+
+Run this command and get the following result:
+
+```plain
+> POST /$ HTTP/1.1
+> Host: localhost:8888
+> Opwire-Execution-Timeout: 0.5s
+> Opwire-Request-Id: 123456-7890-1234-567890123
+>
+< HTTP/1.1 200 OK
+< X-Exec-Duration: 0.118199
+< Date: Tue, 23 Apr 2019 09:17:04 GMT
+< Content-Length: 714
+< Content-Type: text/plain
+<
+{
+  "OPWIRE_EDITION": {
+    "revision": "60d6ac6",
+    "version": "v1.0.7-33-g60d6ac6"
+  },
+  "OPWIRE_REQUEST": {
+    "method": "POST",
+    "path": "/$",
+    "header": {
+      "Accept-Encoding": [
+        "gzip"
+      ],
+      "Content-Length": [
+        "53"
+      ],
+      "Opwire-Execution-Timeout": [
+        "0.5s"
+      ],
+      "Opwire-Request-Id": [
+        "123456-7890-1234-567890123"
+      ],
+      "User-Agent": [
+        "Go-http-client/1.1"
+      ]
+    },
+    "query": {},
+    "params": null
+  },
+  "OPWIRE_SETTINGS": {
+    "MYSQL_PASSWORD": "root",
+    "MYSQL_URL": "mysql://localhost:3306",
+    "MYSQL_USERNAME": "root"
+  },
+  "input": {
+    "name": "Opwire",
+    "url": "https://opwire.org"
+  }
+}
+```
+
+### Step 3. Make a snapshot of testcase
+
+In order to generate a snapshot of testcase for above request, we just simply append a command line option `--snapshot` to the end of command line:
+
+```shell
+opwire-testa curl --request POST \
+--url http://localhost:8888/%24 \
+--header 'opwire-execution-timeout: 0.5s' \
+--header 'opwire-request-id: 123456-7890-1234-567890123' \
+--data '{
+  "name": "Opwire",
+  "url": "https://opwire.org"
+}'
+--snapshot
+```
+
+Run this command and get the following snapshot:
+
+```yaml
+testcase-snapshot:
+- title: <Generated testcase/scenario>
+  uuid: 1cea84de-65a9-11e9-9934-2047475d3f63
+  request:
+    method: POST
+    url: http://localhost:8888/%24
+    headers:
+    - name: opwire-execution-timeout
+      value: 0.5s
+    - name: opwire-request-id
+      value: 123456-7890-1234-567890123
+    body: |-
+      {
+        "name": "Opwire",
+        "url": "https://opwire.org"
+      }
+  expectation:
+    status-code:
+      is-equal-to: 200
+    headers:
+      has-total: 4
+      items:
+      - name: Date
+        is-equal-to: Tue, 23 Apr 2019 09:21:02 GMT
+      - name: Content-Length
+        is-equal-to: "714"
+      - name: Content-Type
+        is-equal-to: text/plain
+      - name: X-Exec-Duration
+        is-equal-to: "0.132510"
+    body:
+      has-format: json
+      json-include: |-
+        {
+          "OPWIRE_EDITION": {
+            "revision": "60d6ac6",
+            "version": "v1.0.7-33-g60d6ac6"
+          },
+          "OPWIRE_REQUEST": {
+            "header": {
+              "Accept-Encoding": [
+                "gzip"
+              ],
+              "Content-Length": [
+                "53"
+              ],
+              "Opwire-Execution-Timeout": [
+                "0.5s"
+              ],
+              "Opwire-Request-Id": [
+                "123456-7890-1234-567890123"
+              ],
+              "User-Agent": [
+                "Go-http-client/1.1"
+              ]
+            },
+            "method": "POST",
+            "params": null,
+            "path": "/$",
+            "query": {}
+          },
+          "OPWIRE_SETTINGS": {
+            "MYSQL_PASSWORD": "root",
+            "MYSQL_URL": "mysql://localhost:3306",
+            "MYSQL_USERNAME": "root"
+          },
+          "input": {
+            "name": "Opwire",
+            "url": "https://opwire.org"
+          }
+        }
+```
+
+### Step 4. Append the testcase to a testsuite
+
+### Step 5. Verify the updating
 
 ## Contributing
 
