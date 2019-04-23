@@ -288,13 +288,13 @@ TypeError: Invalid data, chunk must be a string or buffer, not object
 
 Copy `curl` command from Insomnia:
 
-![copy-curl-from-insomnia](https://raw.github.com/opwire/sample-cmdline-node/master/docs/assets/images/testa-req-with-insomnia.png)
+![copy-curl-from-insomnia](https://raw.github.com/opwire/sample-cmdline-node/master/docs/assets/images/testa-get-curl.png)
 
 Prepend `curl` command with `opwire-testa` command:
 
-```
+```shell
 opwire-testa curl --request POST \
---url http://localhost:8888/%24 \
+--url http://localhost:8888/$ \
 --header 'opwire-execution-timeout: 0.5s' \
 --header 'opwire-request-id: 123456-7890-1234-567890123' \
 --data '{
@@ -305,7 +305,7 @@ opwire-testa curl --request POST \
 
 Run this command and get the following result:
 
-```plain
+```curl
 > POST /$ HTTP/1.1
 > Host: localhost:8888
 > Opwire-Execution-Timeout: 0.5s
@@ -363,7 +363,7 @@ In order to generate a snapshot of testcase for above request, we just simply ap
 
 ```shell
 opwire-testa curl --request POST \
---url http://localhost:8888/%24 \
+--url http://localhost:8888/$ \
 --header 'opwire-execution-timeout: 0.5s' \
 --header 'opwire-request-id: 123456-7890-1234-567890123' \
 --data '{
@@ -381,7 +381,7 @@ testcase-snapshot:
   uuid: 1cea84de-65a9-11e9-9934-2047475d3f63
   request:
     method: POST
-    url: http://localhost:8888/%24
+    url: http://localhost:8888/$
     headers:
     - name: opwire-execution-timeout
       value: 0.5s
