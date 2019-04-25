@@ -280,6 +280,19 @@ TypeError: Invalid data, chunk must be a string or buffer, not object
 
 ## Testing
 
+### Download `opwire-testa`
+
+To download the latest `opwire-testa` on Linux/macOS/BSD systems, run:
+
+```shell
+curl https://opwire.org/opwire-testa/install.sh | bash
+```
+
+For other systems:
+
+* Download the relevant [`opwire-testa`](https://github.com/opwire/opwire-testa/releases/latest) release,
+* Extract the `opwire-testa` or `opwire-testa.exe` binary from the archive to project home folder (current directory).
+
 ### Step 1. Make an HTTP request with Insomnia
 
 ![make-an-request-with-insomnia](https://raw.github.com/opwire/sample-cmdline-node/master/docs/assets/images/testa-req-with-insomnia.png)
